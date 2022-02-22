@@ -1,0 +1,27 @@
+h1 {
+    text-align: center;
+    background-color: green;
+    padding: 10px;
+    font-size: calc(5vw + 20px);
+    min-width: 300px;
+}
+
+#menu {
+    text-align: center;
+    min-width: 300px;
+}
+
+button {
+    margin-top: calc(3vh + 20px);
+    padding: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-size: calc(3vw + 10px);
+}
+
+#settings {
+
+}
