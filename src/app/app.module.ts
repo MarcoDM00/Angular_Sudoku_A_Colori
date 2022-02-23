@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 
 import { SinglePlayerComponent } from './single-player/single-player.component';
 import { MultiPlayerComponent } from './multi-player/multi-player.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { MultiPlayerComponent } from './multi-player/multi-player.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
