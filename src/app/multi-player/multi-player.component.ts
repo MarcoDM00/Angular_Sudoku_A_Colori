@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Settings } from '../settings';
 
 @Component({
   selector: 'app-multi-player',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MultiPlayerComponent implements OnInit {
 
-  constructor() { }
+  constructor(public settings:Settings) {}
 
   ngOnInit(): void {
+
   }
 
 }

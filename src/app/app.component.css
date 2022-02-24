@@ -1,4 +1,5 @@
 h1 {
+    margin: 0;
     text-align: center;
     background-color: green;
     padding: 10px;
@@ -22,5 +23,57 @@ p {
 }
 
 #settings {
-    
+    text-align: center;
+    margin-top: 20vh;
+    min-width: 350px;
+}
+
+#settings div * {
+    display: inline-block;
+}
+
+.switch * {
+    float: left;
+}
+
+.switch label {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
 }

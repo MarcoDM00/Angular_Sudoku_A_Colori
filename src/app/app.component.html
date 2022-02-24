@@ -1,22 +1,48 @@
 <h1>Sudoku</h1>
-<div id="menu">
-  <button>
+<div id="menu" [hidden]="menu">
+  <button (click)="aggiorna(0)">
     <p>Giocatore singolo</p>
   </button>
   <br>
-  <button>
+  <button (click)="aggiorna(1)">
     <p>Multi giocatore</p>
   </button>
   <br>
-  <button (click)="settings()">
+  <button (click)="aggiorna(2)">
     <p>Impostazioni</p>
   </button>
 </div>
 
-<div id="settings">
-  <label>Colore sfondo gioco  </label>
-  <input type="text" [(ngModel)]="coloreSfondo">
-  
+<div id="settings" [hidden]="impo">
+  <div>
+    <label style="font-size: calc(2vw + 10px);">Colore testo caselle</label>
+    <input
+      type="text"
+      [(ngModel)]="colore"
+      style="margin-left: 10px; margin-right: 10px; font-size: calc(1vw + 10px);"
+    >
+    <p
+      style="border: 1px solid black; width: calc(1vw + 15px); height: calc(1vw + 15px); margin-bottom: -5px;"
+      [style.backgroundColor]="colore">
+    </p>
+  </div>
+  <div>
+    <p style="font-size: calc(1vw + 20px);">
+      Dark Mode:
+    </p>
+    <div class="switch">
+      <label class="switch">
+          <input type="checkbox" style="display: none;" [(ngModel)]="darkMode">
+          <div class="slider" (onclick)="darkMode = !darkMode;"></div>
+      </label>
+    </div>
+  </div>
+  <button (click)="aggiorna(3)" style="font-size: calc(2vw + 15px);">
+    Indietro
+  </button>
 </div>
 
-<app-single-player></app-single-player>
+<app-single-player [hidden]="single"></app-single-player>
+<app-multi-player [hidden]="multi"></app-multi-player>
+
+<p>https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/</p>

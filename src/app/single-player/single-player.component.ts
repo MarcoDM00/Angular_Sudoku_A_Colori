@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Settings } from '../settings';
 
 @Component({
   selector: 'app-single-player',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SinglePlayerComponent implements OnInit {
 
-  constructor() { }
+  constructor(public settings:Settings) {}
 
   ngOnInit(): void {
+
   }
 
 }
