@@ -7,24 +7,14 @@ import {Settings} from "./settings";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  menu:boolean = false;
-  single:boolean = true;
-  multi:boolean = true;
-  impo:boolean = true;
-  colore:string = "white";
-  darkMode:boolean = false;
 
-  constructor(private settings:Settings) {}
+  constructor(public settings:Settings) {}
 
   ngOnInit(): void {}
   
   aggiorna(n:number) {
-    if (n == 0) {this.menu = true; this.single = false;}
-    if (n == 1) {this.menu = true; this.multi = false;}
-    if (n == 2) {this.menu = true; this.impo = false;}
-    if (n == 3) {this.menu = false; this.impo = true;}
-
-    this.settings.colore = this.colore;
-    this.settings.darkMode = this.darkMode;
-  }
+    if (n == 0) {this.settings.menu = true; this.settings.single = false;}
+    if (n == 1) {this.settings.menu = true; this.settings.multi = false;}
+    if (n == 2) {this.settings.menu = true; this.settings.impo = false;}
+    if (n == 3) {this.settings.menu = false; this.settings.impo = true;}  }
 }

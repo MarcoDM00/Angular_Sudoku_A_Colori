@@ -6,12 +6,8 @@ import { Settings } from '../settings';
   templateUrl: './single-player.component.html',
   styleUrls: ['./single-player.component.css']
 })
-export class SinglePlayerComponent implements OnInit {
+export class SinglePlayerComponent {
 
   constructor(public settings:Settings) {}
-
-  ngOnInit(): void {
-
-  }
 
 }

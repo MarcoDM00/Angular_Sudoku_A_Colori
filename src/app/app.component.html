@@ -1,5 +1,5 @@
 <h1>Sudoku</h1>
-<div id="menu" [hidden]="menu">
+<div id="menu" [hidden]="settings.menu">
   <button (click)="aggiorna(0)">
     <p>Giocatore singolo</p>
   </button>
@@ -13,27 +13,38 @@
   </button>
 </div>
 
-<div id="settings" [hidden]="impo">
+<div id="settings" [hidden]="settings.impo">
   <div>
     <label style="font-size: calc(2vw + 10px);">Colore testo caselle</label>
     <input
       type="text"
-      [(ngModel)]="colore"
+      [(ngModel)]="settings.colore"
       style="margin-left: 10px; margin-right: 10px; font-size: calc(1vw + 10px);"
     >
     <p
       style="border: 1px solid black; width: calc(1vw + 15px); height: calc(1vw + 15px); margin-bottom: -5px;"
-      [style.backgroundColor]="colore">
+      [style.backgroundColor]="settings.colore">
     </p>
   </div>
   <div>
-    <p style="font-size: calc(1vw + 20px);">
+    <p style="font-size: calc(2vw + 10px);">
       Dark Mode:
     </p>
     <div class="switch">
       <label class="switch">
-          <input type="checkbox" style="display: none;" [(ngModel)]="darkMode">
-          <div class="slider" (onclick)="darkMode = !darkMode;"></div>
+          <input type="checkbox" style="display: none;" [(ngModel)]="settings.darkMode">
+          <div class="slider" (onclick)="settings.darkMode = !settings.darkMode;"></div>
+      </label>
+    </div>
+  </div>
+  <div>
+    <p style="font-size: calc(1vw + 20px);">
+      Numeri come testo delle caselle:
+    </p>
+    <div class="switch">
+      <label class="switch">
+          <input type="checkbox" style="display: none;" [(ngModel)]="settings.numeri">
+          <div class="slider" (onclick)="settings.numeri = !settings.numeri;"></div>
       </label>
     </div>
   </div>
@@ -42,7 +53,5 @@
   </button>
 </div>
 
-<app-single-player [hidden]="single"></app-single-player>
-<app-multi-player [hidden]="multi"></app-multi-player>
-
-<p>https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/</p>
+<app-single-player [hidden]="settings.single"></app-single-player>
+<app-multi-player [hidden]="settings.multi"></app-multi-player>
