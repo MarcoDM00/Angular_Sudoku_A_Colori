@@ -1,11 +1,12 @@
 div {
-    width: 100%;
+    margin-top: 100px;
+    /*width: 100%;
     min-width: 500px;
-    height: 40px;
+    height: 200px;*/
     text-align: center;
-    
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 div * {
-    float: left;
+    display: inline-block;
 }

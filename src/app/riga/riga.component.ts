@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CasellaComponent } from '../casella/casella.component';
 
 @Component({
   selector: 'app-riga',
@@ -11,9 +10,9 @@ export class RigaComponent implements OnInit {
     false, false, true, true, true, true, true, true, true, true, true, true
   ];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-  }
 
+  }
 }
