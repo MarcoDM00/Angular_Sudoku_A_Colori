@@ -13,6 +13,16 @@ export class Settings {
     darkMode:boolean = false;
     numeri:boolean = false;
     precedente:string = "menu";
+    private valori:string[] = [];
 
     constructor() {}
+
+    cambio():void {
+        if (this.numeri) {
+            this.valori = "1-2-3-4-5-6-7-8-9-10".split("-");
+        } else {
+            this.valori = "A-B-C-D-E-F-G-H-I-J".split("-");
+        }
+        console.log(this.valori)
+    }
 }

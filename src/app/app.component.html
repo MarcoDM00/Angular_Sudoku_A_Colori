@@ -8,7 +8,7 @@
     <p>Multi giocatore</p>
   </button>
   <br>
-  <button (click)="aggiorna(2)">
+  <button (click)="settings.precedente = 'menu'; aggiorna(2)">
     <p>Impostazioni</p>
   </button>
 </div>
@@ -43,8 +43,8 @@
     </p>
     <div class="switch">
       <label class="switch">
-          <input type="checkbox" style="display: none;" [(ngModel)]="settings.numeri">
-          <div class="slider" (onclick)="settings.numeri = !settings.numeri;"></div>
+          <input type="checkbox" style="display: none;" [(ngModel)]="settings.numeri" (change)="settings.cambio()">
+          <div class="slider"></div>
       </label>
     </div>
   </div>

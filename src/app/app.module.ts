@@ -8,12 +8,16 @@ import { SinglePlayerComponent } from './single-player/single-player.component';
 import { MultiPlayerComponent } from './multi-player/multi-player.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { CasellaComponent } from './casella/casella.component';
+import { RigaComponent } from './riga/riga.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SinglePlayerComponent,
-    MultiPlayerComponent
+    MultiPlayerComponent,
+    CasellaComponent,
+    RigaComponent
   ],
   imports: [
     BrowserModule,
