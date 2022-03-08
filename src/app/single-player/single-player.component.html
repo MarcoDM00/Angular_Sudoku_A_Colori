@@ -3,5 +3,10 @@
     Impostazioni
 </button>
 
+<br>
 
-<app-riga></app-riga>
+<div class="parent" [style.grid-template-columns]="settings.lvlCss" [style.grid-template-rows]="settings.lvlCss">
+    <div class="casella" *ngFor="let c of caselle; index as i" (click)="click(i)" [hidden]="!c.mostra">
+        {{c.testo}}
+    </div>
+</div>

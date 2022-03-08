@@ -13,7 +13,9 @@ export class Settings {
     darkMode:boolean = false;
     numeri:boolean = false;
     precedente:string = "menu";
-    private valori:string[] = [];
+    valori:string[] = [];
+    livello:number = 1;
+    lvlCss:string = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
 
     constructor() {}
 
@@ -23,6 +25,12 @@ export class Settings {
         } else {
             this.valori = "A-B-C-D-E-F-G-H-I-J".split("-");
         }
-        console.log(this.valori)
+    }
+
+    aumentoLvl() {
+        if (this.livello < 10) {
+            this.livello++;
+            this.lvlCss = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
+        }
     }
 }

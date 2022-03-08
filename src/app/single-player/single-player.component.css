@@ -1,4 +1,18 @@
 #back, #impo {
-    font-size: calc(3vw + 10px);
+    font-size: calc(50% + 10px);
+    min-width: 200px;
+    display: inline-block;
     margin-left: calc(2vw + 30px);
+}
+
+.parent {
+    margin-top: 100px;
+    display: grid;
+}
+
+.casella {
+    min-width: 25px;
+    font-size: 20px;
+    border: 1px black solid;
+    text-align: center;
 }
