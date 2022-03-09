@@ -14,7 +14,7 @@ export class Settings {
     numeri:boolean = false;
     precedente:string = "menu";
     valori:string[] = [];
-    livello:number = 1;
+    livello:number = 10;
     lvlCss:string = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
 
     constructor() {}

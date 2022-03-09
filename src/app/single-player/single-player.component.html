@@ -3,16 +3,31 @@
     Impostazioni
 </button>
 
-<br>
+<hr>
+
+<div style="text-align: center;">
+    <button (click)="reset()">Reset livello</button>
+</div>
 
 <div id="btns" [style.grid-template-columns]="settings.lvlCss">
-    <button *ngFor="let v of valori;" [hidden]="v.mostra" (click)="valore = v.testo" [class]="(v.testo == valore) ? 'selected' : 'none'">
+    <button
+    *ngFor="let v of valori;"
+    [hidden]="v.mostra"
+    (click)="valore = v.testo"
+    [class]="(v.testo == valore) ? 'selected' : ''"
+    [disabled]="v.disable">
         {{v.testo}}
     </button>
 </div>
 
 <div class="parent" [style.grid-template-columns]="settings.lvlCss" [style.grid-template-rows]="settings.lvlCss">
-    <div class="casella" *ngFor="let c of caselle; index as i" (click)="click(i)" [hidden]="!c.mostra">
+    <div
+    class="casella"
+    *ngFor="let c of caselle; index as i"
+    (click)="click(i)"
+    [hidden]="!c.mostra"
+    [style.color]="c.color"
+    [style.font-weight]="c.bold">
         {{c.testo}}
     </div>
 </div>
