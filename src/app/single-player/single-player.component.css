@@ -1,18 +1,33 @@
 #back, #impo {
-    font-size: calc(50% + 10px);
+    font-size: calc(3vw + 10px);
     min-width: 200px;
     display: inline-block;
     margin-left: calc(2vw + 30px);
 }
 
-.parent {
+#btns {
     margin-top: 100px;
+    display: grid;
+    grid-template-rows: 1;
+}
+
+#btns button {
+    text-align: center;
+    font-size: 3vw;
+}
+
+.selected {
+    background-color: coral;
+}
+
+.parent {
+    margin-top: 30px;
     display: grid;
 }
 
 .casella {
     min-width: 25px;
-    font-size: 20px;
+    font-size: 3vw;
     border: 1px black solid;
     text-align: center;
 }

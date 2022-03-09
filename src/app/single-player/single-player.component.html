@@ -5,6 +5,12 @@
 
 <br>
 
+<div id="btns" [style.grid-template-columns]="settings.lvlCss">
+    <button *ngFor="let v of valori;" [hidden]="v.mostra" (click)="valore = v.testo" [class]="(v.testo == valore) ? 'selected' : 'none'">
+        {{v.testo}}
+    </button>
+</div>
+
 <div class="parent" [style.grid-template-columns]="settings.lvlCss" [style.grid-template-rows]="settings.lvlCss">
     <div class="casella" *ngFor="let c of caselle; index as i" (click)="click(i)" [hidden]="!c.mostra">
         {{c.testo}}
