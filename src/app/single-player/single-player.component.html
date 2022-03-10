@@ -12,6 +12,7 @@
 
     <div id="btns" [style.grid-template-columns]="settings.lvlCss">
         <button
+        (keyup)="keyup($event)"
         *ngFor="let v of valori;"
         [hidden]="v.mostra"
         (click)="valore = v.testo"
@@ -27,7 +28,9 @@
         [style.border]="settings.darkMode ? '1px solid white' : '1px solid black'"
         [style.color]="colore"
         *ngFor="let c of caselle; index as i"
-        (click)="click(i)"
+        (keyup)="keyup($event)"
+        (click)="click(i, $event)"
+        (auxclick)="click(i, $event)"
         [hidden]="!c.mostra"
         [style.color]="c.color"
         [style.font-weight]="c.bold">

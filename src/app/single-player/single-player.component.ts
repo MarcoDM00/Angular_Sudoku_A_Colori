@@ -32,10 +32,15 @@ export class SinglePlayerComponent {
     }
   }
 
-  click(id:number) {
+  click(id:number, event:PointerEvent) {
     if (!this.enable) return;
-    if (this.valore != "") {
-      this.caselle[id].testo = this.valore;
+    
+    if (event.button == 1) {
+      this.caselle[id].testo = "-";
+    } else {
+      if (this.valore != "") {
+        this.caselle[id].testo = this.valore;
+      }
     }
 
     for (let i = 0; i < 144; i++) {
@@ -126,7 +131,7 @@ export class SinglePlayerComponent {
   }
 
   reset() {
-    this.valore = "1";
+    this.valore = "";
     for (let i = 0; i < 144; i++) {
       this.caselle[i].testo = "-";
       this.caselle[i].color = "";
@@ -136,5 +141,14 @@ export class SinglePlayerComponent {
 
   vinto() {
 
+  }
+
+  keyup(event:KeyboardEvent) {
+    if (this.valore != "") {
+      var n = parseInt(this.valore);
+      if (event.key == "ArrowRight" && n < this.settings.livello + 2) n += 1
+      if (event.key == "ArrowLeft" && n >1) n -= 1
+      this.valore = n.toString();
+    }
   }
 }
