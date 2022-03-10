@@ -7,7 +7,7 @@ import { Settings } from '../settings';
   styleUrls: ['./single-player.component.css']
 })
 export class SinglePlayerComponent {
-  k:number = this.settings.livello + 2;
+  colore:string = "red";
   caselle:{mostra:boolean, testo:string, color:string, bold:string}[] = [];
   valori:{mostra:boolean, testo:string, disable:boolean}[] = [];
   valore:string = "";
@@ -16,7 +16,7 @@ export class SinglePlayerComponent {
   constructor(public settings:Settings) {
     for (let i = 0; i < 12; i++) {
       //bottoni
-      if (i < this.k) {
+      if (i < (this.settings.livello + 2)) {
         this.valori.push({mostra:false, testo:"" + (i+1), disable:false});
       } else {
         this.valori.push({mostra:true, testo:"" + (i+1), disable:false});
@@ -24,7 +24,7 @@ export class SinglePlayerComponent {
 
       //caselle
       for (let ii = 0; ii < 12; ii++) {
-        if (i < this.k && ii < this.k)
+        if (i < (this.settings.livello + 2) && ii < (this.settings.livello + 2))
           this.caselle.push({mostra:true, testo:"-", color:"", bold:""});
         else
           this.caselle.push({mostra:false, testo:"-", color:"", bold:""});
@@ -45,9 +45,9 @@ export class SinglePlayerComponent {
 
     //controllo righe
     var nValidi = 0;
-    for (let i = 0; i < this.k; i++) {
+    for (let i = 0; i < (this.settings.livello + 2); i++) {
       var vals = [];
-      for (let ii = i * 12; ii < (i * 12) + this.k; ii++) {
+      for (let ii = i * 12; ii < (i * 12) + (this.settings.livello + 2); ii++) {
         var txt = this.caselle[ii].testo;
         if (txt == "-") continue;
         var accetta = true;
@@ -62,13 +62,13 @@ export class SinglePlayerComponent {
       }
       if (vals.length == (this.settings.livello + 2)) {
         nValidi++;
-        for (let ii = i * 12; ii < (i * 12) + this.k; ii++) this.caselle[ii].color = "red";
+        for (let ii = i * 12; ii < (i * 12) + (this.settings.livello + 2); ii++) this.caselle[ii].color = "red";
       }
     }
     
 
     //controllo colonne
-    for (let i = 0; i < this.k; i++) {
+    for (let i = 0; i < (this.settings.livello + 2); i++) {
       var vals = [];
       var x = i;
       var pos = [];
@@ -87,18 +87,22 @@ export class SinglePlayerComponent {
         }
         x += 12;
       }
-      if (vals.length == this.k) {
+      if (vals.length == (this.settings.livello + 2)) {
         nValidi++;
-        for (let ii = 0; ii < 12; ii++) this.caselle[pos[ii]].bold = "bolder";
+        for (let ii = 0; ii < pos.length; ii++) this.caselle[pos[ii]].bold = "bolder";
       }
     }
 
-    if (this.k*2 == nValidi) {
+    if ((this.settings.livello + 2)*2 == nValidi) {
       this.enable = false;
       setTimeout(() => {
-        this.settings.aumentoLvl();
-        if (this.settings.livello < 11) this.mostraCaselle();
         this.enable = true;
+        this.settings.aumentoLvl();
+        if (this.settings.livello < 11) {
+          this.mostraCaselle();
+        } else {
+          this.vinto();
+        }
       }, 1000);
     }
   }
@@ -122,11 +126,15 @@ export class SinglePlayerComponent {
   }
 
   reset() {
-    if (!this.enable) return;
+    this.valore = "1";
     for (let i = 0; i < 144; i++) {
       this.caselle[i].testo = "-";
       this.caselle[i].color = "";
       this.caselle[i].bold = "";
     }
+  }
+
+  vinto() {
+
   }
 }

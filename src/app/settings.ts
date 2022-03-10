@@ -14,7 +14,7 @@ export class Settings {
     numeri:boolean = false;
     precedente:string = "menu";
     valori:string[] = [];
-    livello:number = 10;
+    livello:number = 9;
     lvlCss:string = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
 
     constructor() {}
@@ -28,9 +28,7 @@ export class Settings {
     }
 
     aumentoLvl() {
-        if (this.livello < 10) {
-            this.livello++;
-            this.lvlCss = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
-        }
+        this.livello++;
+        this.lvlCss = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
     }
 }

@@ -1,33 +1,37 @@
-<button id="back" (click)="settings.single = true; settings.menu = false;">Indietro</button>
-<button id="impo" (click)="settings.single = true; settings.impo = false; settings.precedente = 'single';">
-    Impostazioni
-</button>
-
-<hr>
-
-<div style="text-align: center;">
-    <button (click)="reset()">Reset livello</button>
-</div>
-
-<div id="btns" [style.grid-template-columns]="settings.lvlCss">
-    <button
-    *ngFor="let v of valori;"
-    [hidden]="v.mostra"
-    (click)="valore = v.testo"
-    [class]="(v.testo == valore) ? 'selected' : ''"
-    [disabled]="v.disable">
-        {{v.testo}}
+<div [style.background-color]="settings.darkMode ? 'black' : 'white'">
+    <button id="back" (click)="settings.single = true; settings.menu = false;">Indietro</button>
+    <button id="impo" (click)="settings.single = true; settings.impo = false; settings.precedente = 'single';">
+        Impostazioni
     </button>
-</div>
 
-<div class="parent" [style.grid-template-columns]="settings.lvlCss" [style.grid-template-rows]="settings.lvlCss">
-    <div
-    class="casella"
-    *ngFor="let c of caselle; index as i"
-    (click)="click(i)"
-    [hidden]="!c.mostra"
-    [style.color]="c.color"
-    [style.font-weight]="c.bold">
-        {{c.testo}}
+    <hr>
+
+    <div style="text-align: center;">
+        <button (click)="reset()">Reset livello</button>
+    </div>
+
+    <div id="btns" [style.grid-template-columns]="settings.lvlCss">
+        <button
+        *ngFor="let v of valori;"
+        [hidden]="v.mostra"
+        (click)="valore = v.testo"
+        [class]="(v.testo == valore) ? 'selected' : ''"
+        [disabled]="v.disable">
+            {{v.testo}}
+        </button>
+    </div>
+
+    <div class="parent" [style.grid-template-columns]="settings.lvlCss" [style.grid-template-rows]="settings.lvlCss">
+        <div
+        class="casella"
+        [style.border]="settings.darkMode ? '1px solid white' : '1px solid black'"
+        [style.color]="colore"
+        *ngFor="let c of caselle; index as i"
+        (click)="click(i)"
+        [hidden]="!c.mostra"
+        [style.color]="c.color"
+        [style.font-weight]="c.bold">
+            {{c.testo}}
+        </div>
     </div>
 </div>
