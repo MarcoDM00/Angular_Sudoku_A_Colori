@@ -33,7 +33,9 @@
     <div class="switch">
       <label class="switch">
           <input type="checkbox" style="display: none;" [(ngModel)]="settings.darkMode">
-          <div class="slider" (onclick)="settings.darkMode = !settings.darkMode;"></div>
+          <div class="slider"
+          (onclick)="settings.darkMode = !settings.darkMode; settings.switchMode()"
+          ></div>
       </label>
     </div>
   </div>

@@ -25,14 +25,23 @@ export class SinglePlayerComponent {
       //caselle
       for (let ii = 0; ii < 12; ii++) {
         if (i < (this.settings.livello + 2) && ii < (this.settings.livello + 2))
-          this.caselle.push({mostra:true, testo:"-", color:"", bold:""});
+          this.caselle.push({
+            mostra:true,
+            testo:"-",
+            color:this.settings.coloreTesto,
+            bold:""});
         else
-          this.caselle.push({mostra:false, testo:"-", color:"", bold:""});
+          this.caselle.push({
+            mostra:false,
+            testo:"-",
+            color:this.settings.coloreTesto,
+            bold:""});
       }
     }
   }
 
   click(id:number, event:PointerEvent) {
+    console.log(this.settings.coloreTesto)
     if (!this.enable) return;
     
     if (event.button == 1) {
@@ -67,7 +76,8 @@ export class SinglePlayerComponent {
       }
       if (vals.length == (this.settings.livello + 2)) {
         nValidi++;
-        for (let ii = i * 12; ii < (i * 12) + (this.settings.livello + 2); ii++) this.caselle[ii].color = "red";
+        for (let ii = i * 12; ii < (i * 12) + (this.settings.livello + 2); ii++) 
+        this.caselle[ii].color = this.settings.darkMode ? "darkgreen" : "red";
       }
     }
     
