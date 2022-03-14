@@ -7,8 +7,7 @@ import { Settings } from '../settings';
   styleUrls: ['./single-player.component.css']
 })
 export class SinglePlayerComponent {
-  colore:string = "red";
-  caselle:{mostra:boolean, testo:string, color:string, bold:string}[] = [];
+  caselle:{mostra:boolean, testo:string, color:boolean, underline:string}[] = [];
   valori:{mostra:boolean, testo:string, disable:boolean}[] = [];
   valore:string = "";
   enable:boolean = true;
@@ -28,22 +27,20 @@ export class SinglePlayerComponent {
           this.caselle.push({
             mostra:true,
             testo:"-",
-            color:this.settings.coloreTesto,
-            bold:""});
+            color:false,
+            underline:""});
         else
           this.caselle.push({
             mostra:false,
             testo:"-",
-            color:this.settings.coloreTesto,
-            bold:""});
+            color:false,
+            underline:""});
       }
     }
   }
 
   click(id:number, event:PointerEvent) {
-    console.log(this.settings.coloreTesto)
     if (!this.enable) return;
-    
     if (event.button == 1) {
       this.caselle[id].testo = "-";
     } else {
@@ -53,8 +50,8 @@ export class SinglePlayerComponent {
     }
 
     for (let i = 0; i < 144; i++) {
-      this.caselle[i].color = "";
-      this.caselle[i].bold = "";
+      this.caselle[i].color = false;
+      this.caselle[i].underline = "";
     }    
 
     //controllo righe
@@ -77,7 +74,7 @@ export class SinglePlayerComponent {
       if (vals.length == (this.settings.livello + 2)) {
         nValidi++;
         for (let ii = i * 12; ii < (i * 12) + (this.settings.livello + 2); ii++) 
-        this.caselle[ii].color = this.settings.darkMode ? "darkgreen" : "red";
+        this.caselle[ii].color = true;
       }
     }
     
@@ -104,16 +101,16 @@ export class SinglePlayerComponent {
       }
       if (vals.length == (this.settings.livello + 2)) {
         nValidi++;
-        for (let ii = 0; ii < pos.length; ii++) this.caselle[pos[ii]].bold = "bolder";
+        for (let ii = 0; ii < pos.length; ii++) this.caselle[pos[ii]].underline = "underline";
       }
     }
 
     if ((this.settings.livello + 2)*2 == nValidi) {
       this.enable = false;
       setTimeout(() => {
-        this.enable = true;
-        this.settings.aumentoLvl();
-        if (this.settings.livello < 11) {
+        if (this.settings.livello < 10) {
+          this.enable = true;
+          this.settings.aumentoLvl();
           this.mostraCaselle();
         } else {
           this.vinto();
@@ -144,13 +141,13 @@ export class SinglePlayerComponent {
     this.valore = "";
     for (let i = 0; i < 144; i++) {
       this.caselle[i].testo = "-";
-      this.caselle[i].color = "";
-      this.caselle[i].bold = "";
+      this.caselle[i].color = false;
+      this.caselle[i].underline = "";
     }
   }
 
   vinto() {
-
+    alert("Vinto");
   }
 
   keyup(event:KeyboardEvent) {

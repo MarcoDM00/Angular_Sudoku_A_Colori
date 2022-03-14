@@ -9,22 +9,16 @@ export class Settings {
     single:boolean = true;
     multi:boolean = true;
     impo:boolean = true;
-    colore:string = "white";
-    darkMode:boolean = false;
-    coloreTesto:string = "";
+    colore:string = "transparent";
+    darkMode:boolean = true;
     numeri:boolean = false;
     precedente:string = "menu";
     valori:string[] = [];
-    livello:number = 1;
-    rowCss:string = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
+    livello:number = 10;
+    css:string = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
     colCss:string = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
 
     constructor() {}
-
-    switchMode() {
-        this.coloreTesto = this.darkMode ? 'white' : '';
-        console.log("Colore: " + this.coloreTesto)
-    }
 
     cambio() {
         if (this.numeri) {
@@ -36,7 +30,6 @@ export class Settings {
 
     aumentoLvl() {
         this.livello++;
-        this.rowCss = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
-        this.colCss = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
+        this.css = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
     }
 }

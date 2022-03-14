@@ -1,2 +1,11 @@
-<button id="back" (click)="settings.multi = true; settings.menu = false;">Indietro</button>
-<button id="impo" (click)="settings.multi = true; settings.impo = false; settings.precedente = 'multi';">Impostazioni</button>
+<body [style.background-color]="settings.darkMode ? 'black' : 'white'">
+    <br>
+    <div style="text-align: center;">
+        <button id="back" (click)="settings.multi = true; settings.menu = false;">Indietro</button>
+        <button id="impo" (click)="settings.multi = true; settings.impo = false; settings.precedente = 'multi';">
+            Impostazioni
+        </button>
+    </div>
+
+    <hr><br>
+</body>
