@@ -14,7 +14,9 @@ h1 {
 
 button {
     margin-top: calc(3vh + 10px);
-    padding: 5px;
+    padding: 5px 20px;
+    border-radius: 15px;
+    border: 1px solid black;
 }
 
 p {

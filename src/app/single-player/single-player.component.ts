@@ -7,7 +7,7 @@ import { Settings } from '../settings';
   styleUrls: ['./single-player.component.css']
 })
 export class SinglePlayerComponent {
-  caselle:{mostra:boolean, testo:string, color:boolean, underline:string}[] = [];
+  caselle:{mostra:boolean, testo:string, color:boolean, shadow:boolean}[] = [];
   valori:{mostra:boolean, testo:string, disable:boolean}[] = [];
   valore:string = "";
   enable:boolean = true;
@@ -28,13 +28,13 @@ export class SinglePlayerComponent {
             mostra:true,
             testo:"-",
             color:false,
-            underline:""});
+            shadow:false});
         else
           this.caselle.push({
             mostra:false,
             testo:"-",
             color:false,
-            underline:""});
+            shadow:false});
       }
     }
   }
@@ -51,7 +51,7 @@ export class SinglePlayerComponent {
 
     for (let i = 0; i < 144; i++) {
       this.caselle[i].color = false;
-      this.caselle[i].underline = "";
+      this.caselle[i].shadow = false;
     }    
 
     //controllo righe
@@ -101,7 +101,7 @@ export class SinglePlayerComponent {
       }
       if (vals.length == (this.settings.livello + 2)) {
         nValidi++;
-        for (let ii = 0; ii < pos.length; ii++) this.caselle[pos[ii]].underline = "underline";
+        for (let ii = 0; ii < pos.length; ii++) this.caselle[pos[ii]].shadow = true;
       }
     }
 
@@ -142,7 +142,7 @@ export class SinglePlayerComponent {
     for (let i = 0; i < 144; i++) {
       this.caselle[i].testo = "-";
       this.caselle[i].color = false;
-      this.caselle[i].underline = "";
+      this.caselle[i].shadow = false;
     }
   }
 

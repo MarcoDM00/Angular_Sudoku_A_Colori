@@ -1,5 +1,5 @@
 <body [style.background-color]="settings.darkMode ? 'black' : ''">
-  <h1 [style.background-color]="settings.darkMode ? 'rgb(2, 28, 85)' : 'green'">Sudoku</h1>
+  <h1 [style.background-color]="settings.darkMode ? 'rgb(2, 28, 85)' : 'green'" [style.color]="settings.darkMode ? 'yellow' : ''">Sudoku</h1>
   <div id="menu" [hidden]="settings.menu">
     <button
     (click)="aggiorna(0)"

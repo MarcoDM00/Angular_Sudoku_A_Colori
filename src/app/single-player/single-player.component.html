@@ -36,7 +36,7 @@
         [hidden]="!c.mostra"
         [style.background-color]="settings.colore"
         [style.color]="settings.darkMode ? c.color ? 'green' : 'white' : c.color ? 'red' : ''"
-        [style.text-decoration]="c.underline">
+        [style.text-shadow]="settings.darkMode ? c.shadow ? '1px 1px lightblue, -1px -1px lightblue' : '' : c.shadow ? '1.5px 1.5px green, -1.5px -1.5px lightgreen' : ''">
             {{c.testo}}
         </div>
     </div>
