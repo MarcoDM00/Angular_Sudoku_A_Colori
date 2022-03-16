@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, AfterContentInit } from '@angular/core';
 import { Settings } from '../settings';
 
 @Component({
@@ -6,7 +6,7 @@ import { Settings } from '../settings';
   templateUrl: './single-player.component.html',
   styleUrls: ['./single-player.component.css']
 })
-export class SinglePlayerComponent {
+export class SinglePlayerComponent implements AfterContentChecked {
   caselle:{mostra:boolean, testo:string, color:boolean, shadow:boolean}[] = [];
   valori:{mostra:boolean, testo:string, disable:boolean}[] = [];
   valore:string = "";
@@ -15,11 +15,7 @@ export class SinglePlayerComponent {
   constructor(public settings:Settings) {
     for (let i = 0; i < 12; i++) {
       //bottoni
-      if (i < (this.settings.livello + 2)) {
-        this.valori.push({mostra:false, testo:"" + (i+1), disable:false});
-      } else {
-        this.valori.push({mostra:true, testo:"" + (i+1), disable:false});
-      }
+      this.valori.push({mostra:i < (this.settings.livello * 2) ? false : true, testo:"" + this.settings.valori[i], disable:false});
 
       //caselle
       for (let ii = 0; ii < 12; ii++) {
@@ -40,6 +36,7 @@ export class SinglePlayerComponent {
   }
 
   click(id:number, event:PointerEvent) {
+    this.valori[0].testo = "ciao";
     if (!this.enable) return;
     if (event.button == 1) {
       this.caselle[id].testo = "-";
@@ -156,6 +153,28 @@ export class SinglePlayerComponent {
       if (event.key == "ArrowRight" && n < this.settings.livello + 2) n += 1
       if (event.key == "ArrowLeft" && n >1) n -= 1
       this.valore = n.toString();
+    }
+  }
+
+  ngAfterContentChecked() {
+    //bottoni
+    for (let i = 0; i < 12; i++) {
+      this.valori[i].testo = this.settings.valori[i];
+    }
+    console.log(this.valori)
+
+    //caselle
+    for (let i = 0; i < 144; i++) {
+      if (this.caselle[i].testo != "-") {
+        console.log(this.caselle[i].testo);
+        console.log(this.caselle[i].testo.match("[1-12]*"));
+        if (this.caselle[i].testo.match("[1-12]*")) {
+          console.log(":)");
+          this.caselle[i].testo = this.settings.valori[parseInt(this.caselle[i].testo) - 1];
+        } else {
+          console.log(":(");
+        }
+      }
     }
   }
 }
