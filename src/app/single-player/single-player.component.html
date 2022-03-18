@@ -1,8 +1,16 @@
 <body [style.background-color]="settings.darkMode ? 'black' : 'white'">
     <br>
     <div style="text-align: center;">
-        <button id="back" (click)="settings.single = true; settings.menu = false;">Indietro</button>
-        <button id="impo" (click)="settings.single = true; settings.impo = false; settings.precedente = 'single';">
+        <button 
+          id="back"
+          (click)="settings.single = true; settings.menu = false;"
+          [style.background-color]="settings.darkMode ? 'aqua' : ''">
+            Indietro
+        </button>
+        <button
+          id="impo"
+          (click)="settings.single = true; settings.impo = false; settings.precedente = 'single';"
+          [style.background-color]="settings.darkMode ? 'aqua' : ''">
             Impostazioni
         </button>
     </div>
@@ -10,7 +18,12 @@
     <hr><br>
 
     <div style="text-align: center;">
-        <button (click)="reset()" style="font-size: 40px;">Reset livello</button>
+        <button
+          (click)="reset(false)"
+          style="font-size: 40px;"
+          [style.background-color]="settings.darkMode ? 'lightgrey' : ''">
+            Reset livello
+        </button>
     </div>
 
     <div id="btns" [style.grid-template-columns]="settings.css">
@@ -33,10 +46,17 @@
         *ngFor="let c of caselle; index as i"
         (keyup)="keyup($event)"
         (mouseup)="click(i, $event)"
-        [hidden]="!c.nascondi"
-        [style.color]="settings.colore"
-        [style.text-shadow]="settings.darkMode ? c.shadow ? '1px 1px lightblue, -1px -1px lightblue' : '' : c.shadow ? '1.5px 1.5px green, -1.5px -1.5px lightgreen' : ''">
+        [hidden]="c.nascondi"
+        [style.background-color]="settings.colore"
+        [style.color]="settings.darkMode ? 'white' : ''"
+        [style.text-decoration]="c.underline ? 'underline' : ''"
+        [style.text-shadow]="settings.darkMode ? c.shadow ? '2px 2px lightblue, -1px -1px lightblue' : '' : c.shadow ? '1.5px 1.5px green, -1.5px -1.5px lightgreen' : ''">
             {{c.testo}}
         </div>
     </div>
+
+    <button
+      [style.background-color]="settings.darkMode ? 'black' : 'white'"
+      id="btn"
+      (keyup)="tasti($event)"></button>
 </body>

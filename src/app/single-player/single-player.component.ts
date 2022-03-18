@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, AfterContentInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { Settings } from '../settings';
 
 @Component({
@@ -7,39 +7,43 @@ import { Settings } from '../settings';
   styleUrls: ['./single-player.component.css']
 })
 export class SinglePlayerComponent implements AfterContentChecked {
-  caselle:{nascondi:boolean, testo:string, color:boolean, shadow:boolean}[] = [];
+  caselle:{nascondi:boolean, testo:string, modificabile:boolean, underline:boolean, shadow:boolean}[] = [];
   valori:{nascondi:boolean, testo:string, disable:boolean}[] = [];
   valore:string = "";
   enable:boolean = true;
+  caselleVisibili:number[] = [];
+  keys:string = "";
 
   constructor(public settings:Settings) {
     for (let i = 0; i < 12; i++) {
       //bottoni
       this.valori.push({
-        nascondi:i < (this.settings.livello + 2) ? false : true,
+        nascondi:true,
         testo:"" + this.settings.valori[i],
-        disable:false});
+        disable:false
+      });
 
       //caselle
       for (let ii = 0; ii < 12; ii++) {
-        if (i < (this.settings.livello + 2) && ii < (this.settings.livello + 2))
-          this.caselle.push({
-            nascondi:true,
-            testo:"-",
-            color:false,
-            shadow:false});
-        else
-          this.caselle.push({
-            nascondi:false,
-            testo:"-",
-            color:false,
-            shadow:false});
+        this.caselleVisibili.push(ii + (i * 12));
+        this.caselle.push({
+          nascondi:true,
+          testo:"-",
+          modificabile:true,
+          underline:false,
+          shadow:false});
       }
     }
+
+    this.mostraCaselle();
+
+    
   }
 
   click(id:number, event:PointerEvent) {
     if (!this.enable) return;
+    if (!this.caselle[id].modificabile) return;
+
     if (event.button == 1) {
       this.caselle[id].testo = "-";
     } else {
@@ -49,7 +53,7 @@ export class SinglePlayerComponent implements AfterContentChecked {
     }
 
     for (let i = 0; i < 144; i++) {
-      this.caselle[i].color = false;
+      this.caselle[i].underline = false;
       this.caselle[i].shadow = false;
     }    
 
@@ -72,7 +76,7 @@ export class SinglePlayerComponent implements AfterContentChecked {
       }
       if (vals.length == (this.settings.livello + 2)) {
         nValidi++;
-        for (let ii = i * 12; ii < (i * 12) + (this.settings.livello + 2); ii++) this.caselle[ii].color = true;
+        for (let ii = i * 12; ii < (i * 12) + (this.settings.livello + 2); ii++) this.caselle[ii].underline = true;
       }
     }
     
@@ -109,7 +113,7 @@ export class SinglePlayerComponent implements AfterContentChecked {
         if (this.settings.livello < 10) {
           this.enable = true;
           this.settings.aumentoLvl();
-          this.nascondiCaselle();
+          this.mostraCaselle();
         } else {
           this.vinto();
         }
@@ -117,9 +121,10 @@ export class SinglePlayerComponent implements AfterContentChecked {
     }
   }
 
-  nascondiCaselle() {
-    this.reset();
+  mostraCaselle() {
+    this.reset(true);
 
+    this.caselleVisibili = [];
     for (let i = 0; i < 12; i++) {
       //bottoni
       if (i < (this.settings.livello + 2)) {
@@ -129,17 +134,31 @@ export class SinglePlayerComponent implements AfterContentChecked {
       //caselle
       for (let ii = i * 12; ii < (i + 1) * 12; ii++) {
         if (i < (this.settings.livello + 2) && ii < (i*12 + (this.settings.livello + 2))) {
-          this.caselle[ii].nascondi = true;
+          this.caselle[ii].nascondi = false;
+          this.caselleVisibili.push(ii);
         }
       }
     }
+
+    //valori preimpostati
+    for (let i = 0; i < (this.settings.livello + 1); i++) {
+      var x;
+      do {
+        x = Math.floor(Math.random() * this.caselleVisibili.length); //da 0 a length - 1
+      } while (this.caselle[this.caselleVisibili[x]].testo != "-");
+      this.caselle[this.caselleVisibili[x]].testo = this.settings.valori[i];
+      this.caselle[this.caselleVisibili[x]].modificabile = false;
+    }
   }
 
-  reset() {
+  reset(tutto:boolean) {
+    this.keys = "";
     this.valore = "";
     for (let i = 0; i < 144; i++) {
+      if (!tutto && !this.caselle[i].modificabile) continue;
+      if (tutto) this.caselle[i].modificabile = true;
       this.caselle[i].testo = "-";
-      this.caselle[i].color = false;
+      this.caselle[i].underline = false;
       this.caselle[i].shadow = false;
     }
   }
@@ -167,20 +186,32 @@ export class SinglePlayerComponent implements AfterContentChecked {
     }
 
     //caselle
-    if (this.settings.numeri) {
-      for (let i = 0; i < 144; i++) {
+    for (let i = 0; i < 144; i++) {
+      if (this.caselle[i].testo != "-") {
         var txt = this.caselle[i].testo;
-        if (txt != "-") {
+        if (this.settings.numeri) {
           this.caselle[i].testo = (txt.charCodeAt(0) - 64).toString();
-        }
-      }
-    } else {
-      for (let i = 0; i < 144; i++) {
-        var txt = this.caselle[i].testo;
-        if (txt != "-") {
+        } else {
           this.caselle[i].testo = this.settings.valori[parseInt(txt) - 1];
         }
       }
     }
+  }
+
+  async tasti(event: KeyboardEvent) {
+    if (event.key != "p") {this.keys += event.key} else {this.keys = ""}
+    if (this.keys == "magia") {
+      for (let i = 0; i < (this.settings.livello + 2); i++) {
+        for (let ii = 0; ii < (this.settings.livello + 1); ii++) {
+          console.log((i * 12) + ii);
+          this.caselle[(i * 12) + ii].testo = this.settings.valori[i];
+          await this.sleep(500);
+        }
+      }
+    }
+  }
+
+  sleep(ms:number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }

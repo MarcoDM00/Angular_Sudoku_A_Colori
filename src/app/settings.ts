@@ -9,8 +9,8 @@ export class Settings {
     single:boolean = true;
     multi:boolean = true;
     impo:boolean = true;
-    colore:string = "red";
-    darkMode:boolean = false;
+    colore:string = "";
+    darkMode:boolean = true;
     numeri:boolean = false;
     changeNumeri:boolean = false;
     precedente:string = "menu";
