@@ -9,12 +9,13 @@ export class Settings {
     single:boolean = true;
     multi:boolean = true;
     impo:boolean = true;
-    colore:string = "black";
+    colore:string = "red";
     darkMode:boolean = false;
     numeri:boolean = false;
+    changeNumeri:boolean = false;
     precedente:string = "menu";
     valori:string[] = "A-B-C-D-E-F-G-H-I-J-K-L".split("-");
-    livello:number = 10;
+    livello:number = 1;
     css:string = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
     colCss:string = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
 
@@ -26,6 +27,7 @@ export class Settings {
         } else {
             this.valori = "A-B-C-D-E-F-G-H-I-J-K-L".split("-");
         }
+        this.changeNumeri = true;
     }
 
     aumentoLvl() {

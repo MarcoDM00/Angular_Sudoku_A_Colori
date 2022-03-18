@@ -7,27 +7,30 @@ import { Settings } from '../settings';
   styleUrls: ['./single-player.component.css']
 })
 export class SinglePlayerComponent implements AfterContentChecked {
-  caselle:{mostra:boolean, testo:string, color:boolean, shadow:boolean}[] = [];
-  valori:{mostra:boolean, testo:string, disable:boolean}[] = [];
+  caselle:{nascondi:boolean, testo:string, color:boolean, shadow:boolean}[] = [];
+  valori:{nascondi:boolean, testo:string, disable:boolean}[] = [];
   valore:string = "";
   enable:boolean = true;
 
   constructor(public settings:Settings) {
     for (let i = 0; i < 12; i++) {
       //bottoni
-      this.valori.push({mostra:i < (this.settings.livello * 2) ? false : true, testo:"" + this.settings.valori[i], disable:false});
+      this.valori.push({
+        nascondi:i < (this.settings.livello + 2) ? false : true,
+        testo:"" + this.settings.valori[i],
+        disable:false});
 
       //caselle
       for (let ii = 0; ii < 12; ii++) {
         if (i < (this.settings.livello + 2) && ii < (this.settings.livello + 2))
           this.caselle.push({
-            mostra:true,
+            nascondi:true,
             testo:"-",
             color:false,
             shadow:false});
         else
           this.caselle.push({
-            mostra:false,
+            nascondi:false,
             testo:"-",
             color:false,
             shadow:false});
@@ -36,7 +39,6 @@ export class SinglePlayerComponent implements AfterContentChecked {
   }
 
   click(id:number, event:PointerEvent) {
-    this.valori[0].testo = "ciao";
     if (!this.enable) return;
     if (event.button == 1) {
       this.caselle[id].testo = "-";
@@ -70,8 +72,7 @@ export class SinglePlayerComponent implements AfterContentChecked {
       }
       if (vals.length == (this.settings.livello + 2)) {
         nValidi++;
-        for (let ii = i * 12; ii < (i * 12) + (this.settings.livello + 2); ii++) 
-        this.caselle[ii].color = true;
+        for (let ii = i * 12; ii < (i * 12) + (this.settings.livello + 2); ii++) this.caselle[ii].color = true;
       }
     }
     
@@ -108,7 +109,7 @@ export class SinglePlayerComponent implements AfterContentChecked {
         if (this.settings.livello < 10) {
           this.enable = true;
           this.settings.aumentoLvl();
-          this.mostraCaselle();
+          this.nascondiCaselle();
         } else {
           this.vinto();
         }
@@ -116,19 +117,19 @@ export class SinglePlayerComponent implements AfterContentChecked {
     }
   }
 
-  mostraCaselle() {
+  nascondiCaselle() {
     this.reset();
 
     for (let i = 0; i < 12; i++) {
       //bottoni
       if (i < (this.settings.livello + 2)) {
-        this.valori[i].mostra = false;
+        this.valori[i].nascondi = false;
       }
 
       //caselle
       for (let ii = i * 12; ii < (i + 1) * 12; ii++) {
         if (i < (this.settings.livello + 2) && ii < (i*12 + (this.settings.livello + 2))) {
-          this.caselle[ii].mostra = true;
+          this.caselle[ii].nascondi = true;
         }
       }
     }
@@ -157,22 +158,27 @@ export class SinglePlayerComponent implements AfterContentChecked {
   }
 
   ngAfterContentChecked() {
+    if (!this.settings.changeNumeri) return;
+    this.settings.changeNumeri = false;
+
     //bottoni
     for (let i = 0; i < 12; i++) {
       this.valori[i].testo = this.settings.valori[i];
     }
-    console.log(this.valori)
 
     //caselle
-    for (let i = 0; i < 144; i++) {
-      if (this.caselle[i].testo != "-") {
-        console.log(this.caselle[i].testo);
-        console.log(this.caselle[i].testo.match("[1-12]*"));
-        if (this.caselle[i].testo.match("[1-12]*")) {
-          console.log(":)");
-          this.caselle[i].testo = this.settings.valori[parseInt(this.caselle[i].testo) - 1];
-        } else {
-          console.log(":(");
+    if (this.settings.numeri) {
+      for (let i = 0; i < 144; i++) {
+        var txt = this.caselle[i].testo;
+        if (txt != "-") {
+          this.caselle[i].testo = (txt.charCodeAt(0) - 64).toString();
+        }
+      }
+    } else {
+      for (let i = 0; i < 144; i++) {
+        var txt = this.caselle[i].testo;
+        if (txt != "-") {
+          this.caselle[i].testo = this.settings.valori[parseInt(txt) - 1];
         }
       }
     }

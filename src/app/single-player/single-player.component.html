@@ -17,7 +17,7 @@
         <button
         (keyup)="keyup($event)"
         *ngFor="let v of valori;"
-        [hidden]="v.mostra"
+        [hidden]="v.nascondi"
         (click)="valore = v.testo"
         [style.background-color]="settings.darkMode ? (v.testo == valore) ? 'rgb(31, 19, 61)' : 'darkgrey' : (v.testo == valore) ? 'green' : ''"
         [style.color]="settings.darkMode ? (v.testo == valore) ? 'white' : '' : ''"
@@ -33,7 +33,7 @@
         *ngFor="let c of caselle; index as i"
         (keyup)="keyup($event)"
         (mouseup)="click(i, $event)"
-        [hidden]="!c.mostra"
+        [hidden]="!c.nascondi"
         [style.color]="settings.colore"
         [style.text-shadow]="settings.darkMode ? c.shadow ? '1px 1px lightblue, -1px -1px lightblue' : '' : c.shadow ? '1.5px 1.5px green, -1.5px -1.5px lightgreen' : ''">
             {{c.testo}}
