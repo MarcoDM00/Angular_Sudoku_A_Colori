@@ -35,9 +35,7 @@ export class SinglePlayerComponent implements AfterContentChecked {
       }
     }
 
-    this.mostraCaselle();
-
-    
+    this.mostraCaselle(); 
   }
 
   click(id:number, event:PointerEvent) {
@@ -202,12 +200,25 @@ export class SinglePlayerComponent implements AfterContentChecked {
     if (event.key != "p") {this.keys += event.key} else {this.keys = ""}
     if (this.keys == "magia") {
       for (let i = 0; i < (this.settings.livello + 2); i++) {
-        for (let ii = 0; ii < (this.settings.livello + 1); ii++) {
-          console.log((i * 12) + ii);
-          this.caselle[(i * 12) + ii].testo = this.settings.valori[i];
+        console.log(this.settings.valori[i]);
+        for (let ii = i; ii < i; ii + 12 + (this.settings.livello + 3)) {
+          
+          //this.caselle[(i * 12) + ii].testo = this.settings.valori[i];
           await this.sleep(500);
         }
       }
+      /*
+        this.enable = false;
+        setTimeout(() => {
+          if (this.settings.livello < 10) {
+            this.enable = true;
+            this.settings.aumentoLvl();
+            this.mostraCaselle();
+          } else {
+            this.vinto();
+          }
+        }, 1000);
+      */
     }
   }
 

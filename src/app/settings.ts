@@ -10,7 +10,7 @@ export class Settings {
     multi:boolean = true;
     impo:boolean = true;
     colore:string = "";
-    darkMode:boolean = true;
+    darkMode:boolean = false;
     numeri:boolean = false;
     changeNumeri:boolean = false;
     precedente:string = "menu";
