@@ -1,3 +1,5 @@
+* {z-index: 0; position: relative;}
+
 #back, #impo {
     font-size: calc(3vw + 10px);
     min-width: 200px;
@@ -35,4 +37,24 @@
     right: 0;
     margin: 0;
     border-width: 0.1px;
+}
+
+#win {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    text-align: center;
+}
+
+#win p {
+    font-size: calc(3vw + 20px);
+    color: white;
+}
+
+#win button {
+    font-size: calc(2vw + 20px);
 }

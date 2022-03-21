@@ -13,6 +13,7 @@ export class SinglePlayerComponent implements AfterContentChecked {
   enable:boolean = true;
   caselleVisibili:number[] = [];
   keys:string = "";
+  win:boolean = true;
 
   constructor(public settings:Settings) {
     for (let i = 0; i < 12; i++) {
@@ -108,7 +109,7 @@ export class SinglePlayerComponent implements AfterContentChecked {
     if ((this.settings.livello + 2)*2 == nValidi) {
       this.enable = false;
       setTimeout(() => {
-        if (this.settings.livello < 10) {
+        if (this.settings.livello < 1) {
           this.enable = true;
           this.settings.aumentoLvl();
           this.mostraCaselle();
@@ -162,7 +163,7 @@ export class SinglePlayerComponent implements AfterContentChecked {
   }
 
   vinto() {
-    alert("Vinto");
+    this.win = true;
   }
 
   keyup(event:KeyboardEvent) {
@@ -224,5 +225,9 @@ export class SinglePlayerComponent implements AfterContentChecked {
 
   sleep(ms:number) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  rinizio() {
+    
   }
 }
