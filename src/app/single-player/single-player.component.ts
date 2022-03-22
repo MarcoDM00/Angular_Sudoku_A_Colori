@@ -13,7 +13,7 @@ export class SinglePlayerComponent implements AfterContentChecked {
   enable:boolean = true;
   caselleVisibili:number[] = [];
   keys:string = "";
-  win:boolean = true;
+  win:boolean = false;
 
   constructor(public settings:Settings) {
     for (let i = 0; i < 12; i++) {
@@ -148,14 +148,25 @@ export class SinglePlayerComponent implements AfterContentChecked {
       this.caselle[this.caselleVisibili[x]].testo = this.settings.valori[i];
       this.caselle[this.caselleVisibili[x]].modificabile = false;
     }
+
+    this.settings.changeCss();
   }
 
   reset(tutto:boolean) {
+    if (!this.enable) return;
     this.keys = "";
     this.valore = "";
+    if (tutto) {
+      for (let i = 0; i < 12; i++) {
+        this.valori[i].nascondi = true;
+      }
+    }
     for (let i = 0; i < 144; i++) {
       if (!tutto && !this.caselle[i].modificabile) continue;
-      if (tutto) this.caselle[i].modificabile = true;
+      if (tutto) {
+        this.caselle[i].modificabile = true;
+        this.caselle[i].nascondi = true;
+      }
       this.caselle[i].testo = "-";
       this.caselle[i].underline = false;
       this.caselle[i].shadow = false;
@@ -164,6 +175,7 @@ export class SinglePlayerComponent implements AfterContentChecked {
 
   vinto() {
     this.win = true;
+    this.enable = false;
   }
 
   keyup(event:KeyboardEvent) {
@@ -225,9 +237,5 @@ export class SinglePlayerComponent implements AfterContentChecked {
 
   sleep(ms:number) {
     return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  rinizio() {
-    
   }
 }

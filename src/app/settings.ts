@@ -32,6 +32,9 @@ export class Settings {
 
     aumentoLvl() {
         this.livello++;
+    }
+
+    changeCss() {
         this.css = "repeat(" + (this.livello + 2) + ", " + (12 - this.livello) + "fr)";
     }
 }
